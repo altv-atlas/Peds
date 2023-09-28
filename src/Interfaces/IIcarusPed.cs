@@ -17,4 +17,5 @@ public interface IIcarusPed : IPed
     event PedDamageDelegate? OnDamage;
     event PedHealDelegate? OnHeal;
     event PedNetOwnerChangeDelegate? OnNetOwnerChange;
+    event PedTaskChangeDelegate? OnTaskChange;
 }

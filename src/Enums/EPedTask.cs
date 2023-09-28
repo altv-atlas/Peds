@@ -2,6 +2,7 @@
 
 public enum EPedTask
 {
+    Idle,
     Wander,
     FollowTargetEntity,
     MoveToTargetPosition
