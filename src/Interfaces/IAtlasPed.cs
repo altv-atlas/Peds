@@ -1,12 +1,12 @@
 ﻿using System.Numerics;
-using AltV.Icarus.Peds.Delegates;
-using AltV.Icarus.Peds.Enums;
+using AltV.Atlas.Peds.Delegates;
+using AltV.Atlas.Peds.Enums;
 using AltV.Net.Data;
 using AltV.Net.Elements.Entities;
 
-namespace AltV.Icarus.Peds.Interfaces;
+namespace AltV.Atlas.Peds.Interfaces;
 
-public interface IIcarusPed : IPed
+public interface IAtlasPed : IPed
 {
     void SetPedTask( EPedTask task, IPedTaskData data );
     void SetToWander( Vector3 wanderArea, uint radius, uint minLength, uint timeBetweenWalks );

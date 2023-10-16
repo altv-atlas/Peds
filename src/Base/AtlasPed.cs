@@ -1,21 +1,19 @@
 ﻿using System.Numerics;
-using System.Text.Json;
-using AltV.Icarus.Peds.Delegates;
-using AltV.Icarus.Peds.Enums;
-using AltV.Icarus.Peds.Interfaces;
-using AltV.Icarus.Peds.PedTasks;
+using AltV.Atlas.Peds.Delegates;
+using AltV.Atlas.Peds.Enums;
+using AltV.Atlas.Peds.Interfaces;
+using AltV.Atlas.Peds.PedTasks;
 using AltV.Net;
-using AltV.Net.Async;
 using AltV.Net.Async.Elements.Entities;
 using AltV.Net.Data;
 using AltV.Net.Elements.Entities;
 using Microsoft.Extensions.Logging;
 
-namespace AltV.Icarus.Peds.Base;
+namespace AltV.Atlas.Peds.Base;
 
-public class IcarusPed : AsyncPed, IIcarusPed
+public class AtlasPed : AsyncPed, IAtlasPed
 {
-    private readonly ILogger<IcarusPed> _logger;
+    private readonly ILogger<AtlasPed> _logger;
     private readonly Dictionary<EPedTask, IPedTaskData> _netOwnerBuffer = new( );
     private EPedTask _currentTask = EPedTask.Idle;
     
@@ -25,7 +23,7 @@ public class IcarusPed : AsyncPed, IIcarusPed
     public event PedNetOwnerChangeDelegate? OnNetOwnerChange;
     public event PedTaskChangeDelegate? OnTaskChange;
 
-    public IcarusPed( ILogger<IcarusPed> logger, ICore core, IntPtr nativePointer, uint id ) : base( core, nativePointer, id )
+    public AtlasPed( ILogger<AtlasPed> logger, ICore core, IntPtr nativePointer, uint id ) : base( core, nativePointer, id )
     {
         _logger = logger;
         Alt.OnNetworkOwnerChange += OnNetworkOwnerChange;

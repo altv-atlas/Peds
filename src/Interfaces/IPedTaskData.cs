@@ -1,6 +1,6 @@
 ﻿using AltV.Net;
 
-namespace AltV.Icarus.Peds.Interfaces;
+namespace AltV.Atlas.Peds.Interfaces;
 
 public interface IPedTaskData : IWritable
 {

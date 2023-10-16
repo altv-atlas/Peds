@@ -1,9 +1,9 @@
 ﻿using System.Numerics;
-using AltV.Icarus.Peds.Interfaces;
+using AltV.Atlas.Peds.Interfaces;
 using AltV.Net;
 using AltV.Net.Data;
 
-namespace AltV.Icarus.Peds.PedTasks;
+namespace AltV.Atlas.Peds.PedTasks;
 
 public class PedTaskDataMoveToTargetPosition : IPedTaskData
 {
