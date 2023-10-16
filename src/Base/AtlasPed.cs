@@ -87,7 +87,7 @@ public class AtlasPed : AsyncPed, IAtlasPed
 
     private void EmitPedTask( EPedTask task, IPedTaskData data )
     {
-        NetworkOwner.Emit( "Icarus.SetPedTask", this, ( int ) task, data );
+        NetworkOwner.Emit( "Atlas.SetPedTask", this, ( int ) task, data );
     }
 
     private void AddToNetOwnerBuffer( EPedTask task, IPedTaskData data )
