@@ -3,6 +3,7 @@ using System.Text.Json;
 using AltV.Icarus.Peds.Delegates;
 using AltV.Icarus.Peds.Enums;
 using AltV.Icarus.Peds.Interfaces;
+using AltV.Icarus.Peds.PedTasks;
 using AltV.Net;
 using AltV.Net.Async;
 using AltV.Net.Async.Elements.Entities;
@@ -15,7 +16,7 @@ namespace AltV.Icarus.Peds.Base;
 public class IcarusPed : AsyncPed, IIcarusPed
 {
     private readonly ILogger<IcarusPed> _logger;
-    private readonly Dictionary<EPedTask, object[]> _netOwnerBuffer = new( );
+    private readonly Dictionary<EPedTask, IPedTaskData> _netOwnerBuffer = new( );
     
     public event PedDeadDelegate? OnDeath;
     public event PedDamageDelegate? OnDamage;
@@ -62,45 +63,48 @@ public class IcarusPed : AsyncPed, IIcarusPed
 
         foreach( var (key, value) in _netOwnerBuffer )
         {
-            EmitPedData( key, value );
+            EmitPedTask( key, value );
         }
         
         OnNetOwnerChange?.Invoke( oldNetOwner, newNetOwner );
     }
 
-    public void SetPedTask( EPedTask task, params object[] parameters )
+    public void SetPedTask( EPedTask task, IPedTaskData data )
     {
         if( NetworkOwner is null )
         {
-            AddToNetOwnerBuffer( task, parameters );
+            AddToNetOwnerBuffer( task, data );
             return;
         }
 
-        EmitPedData( task, parameters );
+        EmitPedTask( task, data );
     }
 
-    private void EmitPedData( EPedTask task, object[]? value )
+    private void EmitPedTask( EPedTask task, IPedTaskData data )
     {
-        NetworkOwner.Emit( "Icarus.SetPedData", this, ( int ) task, JsonSerializer.Serialize( value ) );
+        NetworkOwner.Emit( "Icarus.SetPedTask", this, ( int ) task, data );
     }
 
-    private void AddToNetOwnerBuffer( EPedTask task, params object[] value )
+    private void AddToNetOwnerBuffer( EPedTask task, IPedTaskData data )
     {
-        _netOwnerBuffer.Add( task, value );
+        _netOwnerBuffer.Add( task, data );
     }
 
     public void SetToWander( Vector3 wanderArea, uint radius, uint minLength, uint timeBetweenWalks )
     {
-        SetPedTask( EPedTask.Wander, wanderArea, radius, minLength, timeBetweenWalks );
+        var task = new PedTaskDataWander( wanderArea, radius, minLength, timeBetweenWalks );
+        SetPedTask( EPedTask.Wander, task );
     }
     
     public void FollowEntity( IEntity entity )
     {
-        SetPedTask( EPedTask.FollowTargetEntity, entity.Id );
+        var task = new PedTaskDataFollowEntity( entity );
+        SetPedTask( EPedTask.FollowTargetEntity, task );
     }
     
     public void MoveToTargetPosition( Position targetPosition )
     {
-        SetPedTask( EPedTask.MoveToTargetPosition, targetPosition );
+        var task = new PedTaskDataMoveToTargetPosition( targetPosition );
+        SetPedTask( EPedTask.MoveToTargetPosition, task );
     }
 }

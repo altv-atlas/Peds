@@ -8,7 +8,7 @@ namespace AltV.Icarus.Peds.Interfaces;
 
 public interface IIcarusPed : IPed
 {
-    void SetPedTask( EPedTask task, params object[ ] parameters );
+    void SetPedTask( EPedTask task, IPedTaskData data );
     void SetToWander( Vector3 wanderArea, uint radius, uint minLength, uint timeBetweenWalks );
     void FollowEntity( IEntity entity );
     void MoveToTargetPosition( Position targetPosition );
