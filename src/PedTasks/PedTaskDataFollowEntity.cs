@@ -17,11 +17,11 @@ internal class PedTaskDataFollowEntity : IPedTaskData
     {
         writer.BeginObject( );
 
-        writer.Name( "target" );
+        writer.Name( "targetId" );
         if( Target != null )
-            writer.Value( Target );
+            writer.Value( Target.Id );
         else 
-            writer.Value( false );
+            writer.Value( -1 );
         
         writer.EndObject( );
     }
