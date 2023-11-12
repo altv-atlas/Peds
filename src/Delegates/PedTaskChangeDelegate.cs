@@ -1,5 +1,5 @@
-﻿using AltV.Icarus.Peds.Enums;
+﻿using AltV.Atlas.Peds.Enums;
 
-namespace AltV.Icarus.Peds.Delegates;
+namespace AltV.Atlas.Peds.Delegates;
 
 public delegate void PedTaskChangeDelegate( EPedTask oldTask, EPedTask newTask );

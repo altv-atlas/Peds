@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
-using AltV.Icarus.Peds.Interfaces;
+using AltV.Atlas.Peds.Interfaces;
 using AltV.Net;
 
-namespace AltV.Icarus.Peds.PedTasks;
+namespace AltV.Atlas.Peds.PedTasks;
 
 internal class PedTaskDataWander : IPedTaskData
 {

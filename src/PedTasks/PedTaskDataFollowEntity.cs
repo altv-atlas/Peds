@@ -1,8 +1,8 @@
-using AltV.Icarus.Peds.Interfaces;
+using AltV.Atlas.Peds.Interfaces;
 using AltV.Net;
 using AltV.Net.Elements.Entities;
 
-namespace AltV.Icarus.Peds.PedTasks;
+namespace AltV.Atlas.Peds.PedTasks;
 
 internal class PedTaskDataFollowEntity : IPedTaskData
 {

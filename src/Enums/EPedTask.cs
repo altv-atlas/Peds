@@ -1,4 +1,4 @@
-﻿namespace AltV.Icarus.Peds.Enums;
+﻿namespace AltV.Atlas.Peds.Enums;
 
 public enum EPedTask
 {
