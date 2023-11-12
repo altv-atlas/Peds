@@ -19,4 +19,9 @@ public class IcarusPedFactory
     {
         return (T) await AltAsync.CreatePed( model, position, rotation );
     }
+    
+    public async Task<IIcarusPed> CreatePedAsync( string model, Position position, Rotation rotation )
+    {
+        return (IIcarusPed) await AltAsync.CreatePed( model, position, rotation );
+    }
 }

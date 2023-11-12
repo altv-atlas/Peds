@@ -17,11 +17,13 @@ public class IcarusPed : AsyncPed, IIcarusPed
 {
     private readonly ILogger<IcarusPed> _logger;
     private readonly Dictionary<EPedTask, IPedTaskData> _netOwnerBuffer = new( );
+    private EPedTask _currentTask = EPedTask.Idle;
     
     public event PedDeadDelegate? OnDeath;
     public event PedDamageDelegate? OnDamage;
     public event PedHealDelegate? OnHeal;
     public event PedNetOwnerChangeDelegate? OnNetOwnerChange;
+    public event PedTaskChangeDelegate? OnTaskChange;
 
     public IcarusPed( ILogger<IcarusPed> logger, ICore core, IntPtr nativePointer, uint id ) : base( core, nativePointer, id )
     {
@@ -60,11 +62,14 @@ public class IcarusPed : AsyncPed, IIcarusPed
     {
         if( !target.Equals( this ) || oldNetOwner != null || _netOwnerBuffer.Count == 0 )
             return;
-
+        
         foreach( var (key, value) in _netOwnerBuffer )
         {
             EmitPedTask( key, value );
         }
+
+        _currentTask = _netOwnerBuffer.LastOrDefault( ).Key;
+        _netOwnerBuffer.Clear( );
         
         OnNetOwnerChange?.Invoke( oldNetOwner, newNetOwner );
     }
@@ -78,6 +83,8 @@ public class IcarusPed : AsyncPed, IIcarusPed
         }
 
         EmitPedTask( task, data );
+        OnTaskChange?.Invoke( _currentTask, task );
+        _currentTask = task;
     }
 
     private void EmitPedTask( EPedTask task, IPedTaskData data )
