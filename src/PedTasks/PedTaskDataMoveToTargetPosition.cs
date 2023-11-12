@@ -5,11 +5,11 @@ using AltV.Net.Data;
 
 namespace AltV.Atlas.Peds.PedTasks;
 
-public class PedTaskDataMoveToTargetPosition : IPedTaskData
+internal class PedTaskDataMoveToTargetPosition : IPedTaskData
 {
     private Position TargetPosition { get; set; }
 
-    public PedTaskDataMoveToTargetPosition( Position targetPosition )
+    internal PedTaskDataMoveToTargetPosition( Position targetPosition )
     {
         TargetPosition = targetPosition;
     }
