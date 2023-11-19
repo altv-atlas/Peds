@@ -1,4 +1,5 @@
 ﻿using AltV.Atlas.Peds.Interfaces;
+using AltV.Atlas.Peds.Shared.Interfaces;
 using AltV.Net.Async;
 using AltV.Net.Data;
 using Microsoft.Extensions.Logging;
