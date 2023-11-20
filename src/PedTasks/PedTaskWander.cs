@@ -15,37 +15,6 @@ namespace AltV.Atlas.Peds.PedTasks;
 /// <param name="minLength">Minimum length to walk</param>
 /// <param name="timeBetweenWalks">Waiting time between walks</param>
 public class PedTaskWander( Vector3 position, uint radius, uint minLength, uint timeBetweenWalks )
-    : PedTaskWanderBase( position, radius, minLength, timeBetweenWalks ), IPedTask, IWritable
+    : PedTaskWanderBase( position, radius, minLength, timeBetweenWalks ), IPedTask
 {
-    /// <summary>
-    /// Convert type to altV serializable entity
-    /// </summary>
-    /// <param name="writer"></param>
-    public void OnWrite( IMValueWriter writer )
-    {
-        writer.BeginObject(  );
-        
-        writer.Name( "pos" );
-        writer.BeginObject( );
-        writer.Name( "x" );
-        writer.Value( Position.X );
-        writer.Name( "y" );
-        writer.Value( Position.Y );
-        writer.Name( "z" );
-        writer.Value( Position.Z );
-        writer.EndObject( );
-        
-        writer.Name( "radius" );
-        writer.Value( Radius );
-        writer.Name( "minLength" );
-        writer.Value( MinLength );
-        writer.Name( "timeBetweenWalks" );
-        writer.Value( TimeBetweenWalks );
-        
-        writer.EndObject( );
-    }
-    public void Execute( ISharedPed ped )
-    {
-        throw new NotImplementedException( );
-    }
 }

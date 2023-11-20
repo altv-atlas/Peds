@@ -9,23 +9,6 @@ namespace AltV.Atlas.Peds.PedTasks;
 /// Task to make the ped follow a player
 /// </summary>
 /// <param name="targetId">The remote ID of the player</param>
-public class PedTaskFollowPlayer( uint targetId ) : PedTaskFollowPlayerBase( targetId ), IPedTask, IWritable
+public class PedTaskFollowPlayer( uint targetId ) : PedTaskFollowPlayerBase( targetId ), IPedTask
 {
-    /// <summary>
-    /// Convert type to altV serializable entity
-    /// </summary>
-    /// <param name="writer"></param>
-    public void OnWrite( IMValueWriter writer )
-    {
-        writer.BeginObject( );
-
-        writer.Name( "targetId" );
-        writer.Value( TargetId );
-        
-        writer.EndObject( );
-    }
-    public void Execute( ISharedPed ped )
-    {
-        throw new NotImplementedException( );
-    }
 }

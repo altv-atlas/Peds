@@ -35,7 +35,11 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
             if( _currentTask is null )
                 DeleteStreamSyncedMetaData( "CurrentTask" );
             else
-                SetStreamSyncedMetaData( "CurrentTask", TypeConverter.ToJson( _currentTask ) );
+            {
+                var json = TypeConverter.ToJson( _currentTask );
+                _logger.LogInformation( "converted to json: {Json}", json );
+                SetStreamSyncedMetaData( "CurrentTask", json );
+            }
         }
     }
     
@@ -117,6 +121,7 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
     /// <param name="pedTask">pedTask for the task</param>
     public void SetPedTask<T>( T pedTask ) where T : class, IPedTask
     {
+        _logger.LogInformation( "SetPedTask {PedTask}", typeof(T) );
         OnTaskChange?.Invoke( CurrentTask, pedTask );
         CurrentTask = pedTask;
     }
