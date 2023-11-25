@@ -9,6 +9,6 @@ namespace AltV.Atlas.Peds.PedTasks;
 /// Task to make the ped follow a player
 /// </summary>
 /// <param name="targetId">The remote ID of the player</param>
-public class PedTaskFollowPlayer( uint targetId ) : PedTaskFollowPlayerBase( targetId ), IPedTask
+public class PedTaskFollowPlayer( uint targetId ) : PedTaskFollowPlayerBase( targetId )
 {
 }

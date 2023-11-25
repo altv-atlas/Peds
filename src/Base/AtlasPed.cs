@@ -105,7 +105,7 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
         if( !ped.Equals( this ) )
             return;
         
-        OnDeath?.Invoke( killer, weapon );
+        OnDeath?.Invoke( this, killer, weapon );
     }
 
     private void OnNetworkOwnerChange( IEntity target, IPlayer? oldNetOwner, IPlayer? newNetOwner )
@@ -115,6 +115,7 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
         
         OnNetOwnerChange?.Invoke( oldNetOwner, newNetOwner );
     }
+    
     /// <summary>
     /// Give the ped a specific task
     /// </summary>

@@ -1,6 +1,7 @@
 ﻿using AltV.Atlas.Peds.Base;
 using AltV.Atlas.Peds.Factories;
 using AltV.Atlas.Peds.Interfaces;
+using AltV.Atlas.Peds.Shared.Factories;
 using AltV.Atlas.Peds.Shared.Interfaces;
 using AltV.Net;
 using AltV.Net.Async.Elements.Entities;
@@ -24,6 +25,7 @@ public static class PedModule
         serviceCollection.AddTransient<IAtlasServerPed, AtlasPed>( );
         serviceCollection.AddTransient<AtlasPedFactory>( );
         serviceCollection.AddTransient<IPed, AsyncPed>( );
+        serviceCollection.AddTransient<PedTaskFactory>( );
 
         serviceCollection.AddTransient<IEntityFactory<IPed>, AltPedFactory>( );
         

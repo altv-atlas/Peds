@@ -15,6 +15,6 @@ namespace AltV.Atlas.Peds.PedTasks;
 /// <param name="minLength">Minimum length to walk</param>
 /// <param name="timeBetweenWalks">Waiting time between walks</param>
 public class PedTaskWander( Vector3 position, uint radius, uint minLength, uint timeBetweenWalks )
-    : PedTaskWanderBase( position, radius, minLength, timeBetweenWalks ), IPedTask
+    : PedTaskWanderBase( position, radius, minLength, timeBetweenWalks )
 {
 }
