@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Text.Json;
 using AltV.Atlas.Peds.Delegates;
 using AltV.Atlas.Peds.Interfaces;
 using AltV.Atlas.Peds.PedTasks;
@@ -22,6 +23,8 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
 {
     private readonly ILogger<AtlasPed> _logger;
 
+    private readonly JsonTypeConverter<IPedTask> pedTaskJsonConverter = new();
+    
     private IPedTask? _currentTask;
     /// <summary>
     /// The current ped task
@@ -36,7 +39,7 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
                 DeleteStreamSyncedMetaData( "CurrentTask" );
             else
             {
-                var json = TypeConverter.ToJson( _currentTask );
+                var json = JsonSerializer.Serialize( _currentTask, JsonOptions.WithConverters( pedTaskJsonConverter ) );
                 _logger.LogInformation( "converted to json: {Json}", json );
                 SetStreamSyncedMetaData( "CurrentTask", json );
             }
@@ -84,6 +87,11 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
         Alt.OnPedHeal += OnPedHeal;
     }
 
+    ~AtlasPed( )
+    {
+        CurrentTask?.OnStop( this );
+    }
+
     private void OnPedHeal( IPed ped, ushort oldHealth, ushort newHealth, ushort oldArmour, ushort newArmour )
     {
         if( !ped.Equals( this ) )
@@ -105,6 +113,7 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
         if( !ped.Equals( this ) )
             return;
         
+        CurrentTask?.OnStop( this );
         OnDeath?.Invoke( this, killer, weapon );
     }
 
