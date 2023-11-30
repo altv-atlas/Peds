@@ -22,6 +22,7 @@ public static class PedModule
     /// <returns>The service collection</returns>
     public static IServiceCollection RegisterPedModule( this IServiceCollection serviceCollection )
     {
+        Alt.Log( "[ATLAS] Ped Module Registered!" );
         serviceCollection.AddTransient<IAtlasServerPed, AtlasPed>( );
         serviceCollection.AddTransient<AtlasPedFactory>( );
         serviceCollection.AddTransient<IPed, AsyncPed>( );

@@ -36,12 +36,12 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
             _currentTask = value;
             
             if( _currentTask is null )
-                DeleteStreamSyncedMetaData( "CurrentTask" );
+                DeleteStreamSyncedMetaData( "atlas:peds:currentTask" );
             else
             {
                 var json = JsonSerializer.Serialize( _currentTask, JsonOptions.WithConverters( pedTaskJsonConverter ) );
                 _logger.LogInformation( "converted to json: {Json}", json );
-                SetStreamSyncedMetaData( "CurrentTask", json );
+                SetStreamSyncedMetaData( "atlas:peds:currentTask", json );
             }
         }
     }
