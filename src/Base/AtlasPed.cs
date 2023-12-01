@@ -22,10 +22,9 @@ namespace AltV.Atlas.Peds.Base;
 public class AtlasPed : AsyncPed, IAtlasServerPed
 {
     private readonly ILogger<AtlasPed> _logger;
-
-    private readonly JsonTypeConverter<IPedTask> pedTaskJsonConverter = new();
-    
+    private readonly JsonTypeConverter<IPedTask> _pedTaskJsonConverter = new();
     private IPedTask? _currentTask;
+    
     /// <summary>
     /// The current ped task
     /// </summary>
@@ -36,12 +35,12 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
             _currentTask = value;
             
             if( _currentTask is null )
-                DeleteStreamSyncedMetaData( "atlas:peds:currentTask" );
+                DeleteStreamSyncedMetaData( PedConstants.CurrentTaskMetaKey );
             else
             {
-                var json = JsonSerializer.Serialize( _currentTask, JsonOptions.WithConverters( pedTaskJsonConverter ) );
-                _logger.LogInformation( "converted to json: {Json}", json );
-                SetStreamSyncedMetaData( "atlas:peds:currentTask", json );
+                var json = JsonSerializer.Serialize( _currentTask, JsonOptions.WithConverters( _pedTaskJsonConverter ) );
+                _logger.LogTrace( "converted to json: {Json}", json );
+                SetStreamSyncedMetaData( PedConstants.CurrentTaskMetaKey, json );
             }
         }
     }
@@ -131,7 +130,7 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
     /// <param name="pedTask">pedTask for the task</param>
     public void SetPedTask<T>( T pedTask ) where T : class, IPedTask
     {
-        _logger.LogInformation( "SetPedTask {PedTask}", typeof(T) );
+        _logger.LogTrace( "SetPedTask {PedTask}", typeof(T) );
         OnTaskChange?.Invoke( CurrentTask, pedTask );
         CurrentTask = pedTask;
     }
