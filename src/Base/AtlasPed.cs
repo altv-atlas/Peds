@@ -86,6 +86,9 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
         Alt.OnPedHeal += OnPedHeal;
     }
 
+    /// <summary>
+    /// Destructor
+    /// </summary>
     ~AtlasPed( )
     {
         CurrentTask?.OnStop( this );
