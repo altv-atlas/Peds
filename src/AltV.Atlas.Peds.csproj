@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>3.1.0</Version>
+        <Version>3.2.0</Version>
         <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/altv-atlas/Peds.git</RepositoryUrl>
@@ -15,18 +15,22 @@
     
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="\" />
-        <PackageReference Include="AltV.Net.Async" Version="16.4.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="AltV.Net.Async" Version="16.4.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(Configuration)' != 'Debug' ">
-        <PackageReference Include="AltV.Atlas.Peds.Shared" Version="2.1.0" />
-        <PackageReference Include="AltV.Atlas.Shared" Version="3.1.0" />
+    <ItemGroup Condition="'$(Configuration)' != 'Debug' ">
+        <PackageReference Include="AltV.Atlas.Shared" Version="3.2.0" />
+        <PackageReference Include="AltV.Atlas.Peds.Shared" Version="2.2.0" />
     </ItemGroup>
-
-    <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <ProjectReference Include="..\..\AltV.Atlas.Peds.Shared\AltV.Atlas.Peds.Shared.csproj" />
+    
+    
+    <ItemGroup Condition="'$(Configuration)' == 'Debug' ">
+      <ProjectReference Include="..\..\..\AltV.Atlas.Shared\AltV.Atlas.Shared.csproj" />
+      <ProjectReference Include="..\..\AltV.Atlas.Peds.Shared\AltV.Atlas.Peds.Shared.csproj" />
     </ItemGroup>
     
 </Project>

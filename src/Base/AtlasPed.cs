@@ -22,7 +22,7 @@ namespace AltV.Atlas.Peds.Base;
 public class AtlasPed : AsyncPed, IAtlasServerPed
 {
     private readonly ILogger<AtlasPed> _logger;
-    private readonly JsonTypeConverter<IPedTask> _pedTaskJsonConverter = new();
+    private readonly JsonTypeResolver<IPedTask> _pedTaskJsonTypeResolver = new();
     private IPedTask? _currentTask;
     
     /// <summary>
@@ -38,7 +38,7 @@ public class AtlasPed : AsyncPed, IAtlasServerPed
                 DeleteStreamSyncedMetaData( PedConstants.CurrentTaskMetaKey );
             else
             {
-                var json = JsonSerializer.Serialize( _currentTask, JsonOptions.WithConverters( _pedTaskJsonConverter ) );
+                var json = JsonSerializer.Serialize( _currentTask, JsonOptions.WithTypeResolver( _pedTaskJsonTypeResolver ) );
                 _logger.LogTrace( "converted to json: {Json}", json );
                 SetStreamSyncedMetaData( PedConstants.CurrentTaskMetaKey, json );
             }
